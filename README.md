@@ -1,1 +1,1 @@
-# Trail-Buddy
+# AI adventures for dog walks
