@@ -1,4 +1,4 @@
-import type { FC, Dispatch, SetStateAction } from 'react';
+import type { Dispatch, SetStateAction } from 'react';
 import { Compass, Footprints, Sparkles, MapPin, Wifi, WifiOff, Cpu, Award } from 'lucide-react';
 import type { NavigationTab, SystemStatus } from '../types';
 
@@ -10,13 +10,13 @@ export interface NavbarProps {
   historyCount?: number;
 }
 
-export const Navbar: FC<NavbarProps> = ({
+export function Navbar({
   activeTab,
   setActiveTab,
   isWalkActive,
   systemStatus,
   historyCount = 0,
-}) => {
+}: NavbarProps) {
   const isGeminiVerified = systemStatus?.gemini?.verified === true;
   const isGeminiUnavailable = systemStatus?.gemini?.status === 'unavailable';
   const isGeminiConfigured = Boolean(systemStatus?.gemini?.configured);
@@ -120,4 +120,7 @@ export const Navbar: FC<NavbarProps> = ({
       </div>
     </header>
   );
-};
+}
+
+export default Navbar;
+

@@ -8,12 +8,12 @@ interface HeroSectionProps {
 
 export const HeroSection: FC<HeroSectionProps> = ({ onPlanClick, onExploreClick }) => {
   return (
-    <section className="hero-section">
+    <section className="hero-section" id="about-section">
       <div className="container hero-container">
         <div className="hero-content">
           <div className="badge-pill badge-forest hero-pill">
             <Sparkles size={14} className="text-forest-green" />
-            <span>Hackathon Edition • AI Olfactory Exploration</span>
+            <span>Sensory Enrichment • Canine Olfactory Quests</span>
           </div>
 
           <h1 className="hero-title">

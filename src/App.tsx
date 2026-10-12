@@ -8,11 +8,12 @@ import { WalkHistoryView } from './components/WalkHistoryView';
 import { SAMPLE_QUESTS } from './data/sampleQuests';
 import type { NavigationTab, Quest, SystemStatus, WalkHistoryItem } from './types';
 import { fetchSystemStatus } from './services/questApi';
-import { Compass, Sparkles, MapPin, Footprints, Award } from 'lucide-react';
+import { Compass, Sparkles, MapPin, Footprints, Award, ShieldCheck, Heart, X } from 'lucide-react';
 import './App.css';
 
 export function App() {
   const [activeTab, setActiveTab] = useState<NavigationTab>('home');
+  const [activeModal, setActiveModal] = useState<'privacy' | 'safety' | null>(null);
   const [sampleQuests] = useState<Quest[]>(SAMPLE_QUESTS);
   const [customQuests, setCustomQuests] = useState<Quest[]>([]);
   const [activeQuest, setActiveQuest] = useState<Quest | null>(SAMPLE_QUESTS[0]);
@@ -82,6 +83,25 @@ export function App() {
     }
   };
 
+  const handleFooterLinkClick = (target: 'about' | 'how-it-works' | 'privacy' | 'safety') => {
+    if (target === 'about') {
+      setActiveTab('home');
+      setTimeout(() => {
+        window.scrollTo({ top: 0, behavior: 'smooth' });
+      }, 50);
+    } else if (target === 'how-it-works') {
+      setActiveTab('home');
+      setTimeout(() => {
+        const el = document.getElementById('sample-quests-section') || document.getElementById('planner-form');
+        if (el) el.scrollIntoView({ behavior: 'smooth' });
+      }, 50);
+    } else if (target === 'privacy') {
+      setActiveModal('privacy');
+    } else if (target === 'safety') {
+      setActiveModal('safety');
+    }
+  };
+
   return (
     <div className="sniffquest-app">
       {/* Top Sticky Header with Online / Offline pill */}
@@ -147,22 +167,55 @@ export function App() {
       {/* Footer */}
       <footer className="app-footer">
         <div className="container footer-inner">
-          <div className="footer-brand">
-            <div className="brand-icon-wrapper" style={{ width: 34, height: 34 }}>
-              <Footprints size={18} />
+          <div className="footer-brand-column">
+            <div className="footer-brand-header">
+              <div className="brand-icon-wrapper" style={{ width: 36, height: 36 }}>
+                <Footprints size={20} />
+              </div>
+              <span className="footer-brand-title">SniffQuest</span>
             </div>
-            <div>
-              <div className="footer-brand-title">SniffQuest</div>
-              <div className="footer-tagline">Sensory Exploration for Happy Dogs</div>
-            </div>
-          </div>
-
-          <div className="footer-meta">
-            <p>Built for the Hackathon • Google Gemini & Ollama Ready 🐾</p>
-            <p style={{ marginTop: '0.2rem', opacity: 0.8 }}>
-              Privacy-first: Cloud keys strictly stored in server .env.
+            <p className="footer-tagline">Little adventures. Happier walks.</p>
+            <p className="footer-description">
+              Discover new ways to let your dog sniff, explore, and enjoy the world—one walk at a time.
             </p>
           </div>
+
+          <nav className="footer-links-nav" aria-label="Footer navigation">
+            <button
+              type="button"
+              className="footer-link-btn"
+              onClick={() => handleFooterLinkClick('about')}
+            >
+              About
+            </button>
+            <button
+              type="button"
+              className="footer-link-btn"
+              onClick={() => handleFooterLinkClick('how-it-works')}
+            >
+              How It Works
+            </button>
+            <button
+              type="button"
+              className="footer-link-btn"
+              onClick={() => handleFooterLinkClick('privacy')}
+            >
+              Privacy
+            </button>
+            <button
+              type="button"
+              className="footer-link-btn"
+              onClick={() => handleFooterLinkClick('safety')}
+            >
+              Dog Safety
+            </button>
+          </nav>
+
+          <div className="footer-divider" />
+
+          <p className="footer-closing-line">
+            Made for curious noses and screen-free adventures.
+          </p>
         </div>
       </footer>
 
@@ -225,6 +278,95 @@ export function App() {
           <span>Walk Mode</span>
         </button>
       </nav>
+
+      {/* Informative Modals for Privacy and Dog Safety */}
+      {activeModal && (
+        <div className="info-modal-backdrop" onClick={() => setActiveModal(null)} role="dialog" aria-modal="true">
+          <div className="info-modal-card" onClick={(e) => e.stopPropagation()}>
+            <div className="info-modal-header">
+              <div className="info-modal-title-wrap">
+                {activeModal === 'privacy' ? (
+                  <>
+                    <div className="info-modal-icon-badge">
+                      <ShieldCheck size={22} />
+                    </div>
+                    <div>
+                      <h3 className="info-modal-title">Privacy Policy</h3>
+                      <p className="info-modal-subtitle">Private, local-first, and respectful of your walks</p>
+                    </div>
+                  </>
+                ) : (
+                  <>
+                    <div className="info-modal-icon-badge safety">
+                      <Heart size={22} />
+                    </div>
+                    <div>
+                      <h3 className="info-modal-title">Dog Safety Guidelines</h3>
+                      <p className="info-modal-subtitle">Enriching walks with safety and comfort first</p>
+                    </div>
+                  </>
+                )}
+              </div>
+              <button
+                type="button"
+                className="info-modal-close-btn"
+                onClick={() => setActiveModal(null)}
+                aria-label="Close dialog"
+              >
+                <X size={20} />
+              </button>
+            </div>
+
+            <div className="info-modal-body">
+              {activeModal === 'privacy' ? (
+                <div className="info-modal-text">
+                  <div className="info-modal-item">
+                    <h4>🐾 100% Local Walk History</h4>
+                    <p>Your dog's walk journal, earned badges, and notes are saved directly in your browser's local storage. None of your walks are stored on remote tracking servers.</p>
+                  </div>
+                  <div className="info-modal-item">
+                    <h4>🔒 Zero Personal Profile Tracking</h4>
+                    <p>Information you provide in the planner—such as dog names, energy levels, and preferred terrain—is used exclusively to generate your adventure quests.</p>
+                  </div>
+                  <div className="info-modal-item">
+                    <h4>🛡️ Secure & Private Architecture</h4>
+                    <p>We do not track analytics or use third-party advertising cookies. Everything is designed to keep you and your dog focused on the outdoor trail.</p>
+                  </div>
+                </div>
+              ) : (
+                <div className="info-modal-text">
+                  <div className="info-modal-item">
+                    <h4>🌿 Follow Your Dog's Nose</h4>
+                    <p>Sniff walks are about sensory decompression and mental enrichment, not physical mileage. Give your dog plenty of leash slack and time to explore intriguing scent plumes.</p>
+                  </div>
+                  <div className="info-modal-item">
+                    <h4>☀️ Pavement & Surface Temperature Check</h4>
+                    <p>Asphalt and pavement can quickly become dangerously hot. Place the back of your hand flat on the ground for 7 seconds before walking on sunny days.</p>
+                  </div>
+                  <div className="info-modal-item">
+                    <h4>👀 Environmental Awareness</h4>
+                    <p>Stay mindful of roadside debris, toxic plants, foxtails, and wildlife while your dog sniffs grass lines or park bushes.</p>
+                  </div>
+                  <div className="info-modal-item">
+                    <h4>💧 Hydration & Comfort</h4>
+                    <p>Always bring fresh water, adjust walk length to your dog's age and health, and pause whenever your pup wants to rest in the shade.</p>
+                  </div>
+                </div>
+              )}
+            </div>
+
+            <div className="info-modal-footer">
+              <button
+                type="button"
+                className="btn-primary info-modal-confirm-btn"
+                onClick={() => setActiveModal(null)}
+              >
+                Got It
+              </button>
+            </div>
+          </div>
+        </div>
+      )}
     </div>
   );
 }
