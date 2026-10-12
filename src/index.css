@@ -1,0 +1,239 @@
+/* ==========================================================================
+   SniffQuest Design System
+   Forest Green & Warm Cream Color Palette
+   ========================================================================== */
+
+:root {
+  /* Color Palette - Forest Greens */
+  --color-forest-900: #0f2414;
+  --color-forest-800: #183a21;
+  --color-forest-700: #224f2e;
+  --color-forest-600: #2e663c;
+  --color-forest-500: #3b814d;
+  --color-forest-400: #58a56c;
+  --color-forest-300: #86c997;
+  --color-forest-100: #e2f2e7;
+  --color-forest-50: #f1f8f3;
+
+  /* Color Palette - Warm Cream & Sand */
+  --color-cream-50: #fdfcf7;
+  --color-cream-100: #faf6ec;
+  --color-cream-200: #f3ecdb;
+  --color-cream-300: #e8dcbf;
+  --color-cream-400: #d6c39a;
+  --color-cream-800: #675632;
+  --color-cream-900: #3e321a;
+
+  /* Accents */
+  --color-gold-400: #fbbf24;
+  --color-gold-500: #f59e0b;
+  --color-amber-600: #d97706;
+  --color-bark-700: #4a3424;
+  --color-bark-900: #2b1d14;
+
+  /* Semantic UI */
+  --bg-app: #f7f3e8;
+  --bg-surface: #ffffff;
+  --bg-surface-cream: #faf5eb;
+  --bg-surface-glass: rgba(255, 255, 255, 0.82);
+  --border-subtle: rgba(34, 79, 46, 0.12);
+  --border-active: rgba(46, 102, 60, 0.35);
+
+  --text-primary: #152718;
+  --text-secondary: #4d6050;
+  --text-tertiary: #758b79;
+  --text-inverted: #fdfbf7;
+
+  /* Typography */
+  --font-heading: 'Outfit', -apple-system, BlinkMacSystemFont, 'Segoe UI', Roboto, sans-serif;
+  --font-body: 'Plus Jakarta Sans', -apple-system, BlinkMacSystemFont, 'Segoe UI', Roboto, sans-serif;
+
+  /* Shadows */
+  --shadow-sm: 0 2px 4px rgba(21, 39, 24, 0.04);
+  --shadow-md: 0 4px 12px rgba(21, 39, 24, 0.07), 0 1px 3px rgba(21, 39, 24, 0.04);
+  --shadow-lg: 0 12px 28px rgba(21, 39, 24, 0.1), 0 3px 8px rgba(21, 39, 24, 0.05);
+  --shadow-glow: 0 0 24px rgba(56, 129, 77, 0.25);
+
+  /* Radius */
+  --radius-sm: 8px;
+  --radius-md: 14px;
+  --radius-lg: 22px;
+  --radius-full: 9999px;
+
+  /* Transitions */
+  --transition-fast: 0.18s cubic-bezier(0.16, 1, 0.3, 1);
+  --transition-normal: 0.28s cubic-bezier(0.16, 1, 0.3, 1);
+}
+
+/* Reset & Base */
+*, *::before, *::after {
+  box-sizing: border-box;
+  margin: 0;
+  padding: 0;
+}
+
+html, body {
+  min-height: 100%;
+  font-family: var(--font-body);
+  background-color: var(--bg-app);
+  color: var(--text-primary);
+  line-height: 1.5;
+  -webkit-font-smoothing: antialiased;
+}
+
+/* Background Atmospheric Pattern */
+body {
+  background-image: 
+    radial-gradient(circle at 12% 15%, rgba(56, 129, 77, 0.06) 0%, transparent 40%),
+    radial-gradient(circle at 88% 85%, rgba(217, 119, 6, 0.05) 0%, transparent 45%),
+    linear-gradient(180deg, #fbf7ee 0%, #f4ede0 100%);
+  background-attachment: fixed;
+}
+
+h1, h2, h3, h4, h5, h6 {
+  font-family: var(--font-heading);
+  color: var(--text-primary);
+  font-weight: 700;
+  line-height: 1.25;
+}
+
+button, input, select, textarea {
+  font-family: inherit;
+}
+
+button {
+  cursor: pointer;
+  border: none;
+  background: none;
+}
+
+a {
+  color: inherit;
+  text-decoration: none;
+}
+
+/* Utilities */
+.container {
+  width: 100%;
+  max-width: 1180px;
+  margin: 0 auto;
+  padding: 0 1.25rem;
+}
+
+/* Badge styles */
+.badge-pill {
+  display: inline-flex;
+  align-items: center;
+  gap: 0.4rem;
+  padding: 0.3rem 0.8rem;
+  border-radius: var(--radius-full);
+  font-size: 0.8rem;
+  font-weight: 600;
+  letter-spacing: 0.02em;
+}
+
+.badge-forest {
+  background-color: var(--color-forest-100);
+  color: var(--color-forest-800);
+  border: 1px solid rgba(46, 102, 60, 0.18);
+}
+
+.badge-gold {
+  background-color: #fef3c7;
+  color: #92400e;
+  border: 1px solid #fde68a;
+}
+
+.badge-cream {
+  background-color: var(--color-cream-200);
+  color: var(--color-forest-900);
+  border: 1px solid var(--color-cream-300);
+}
+
+/* Glass panel */
+.glass-panel {
+  background: var(--bg-surface-glass);
+  backdrop-filter: blur(12px);
+  -webkit-backdrop-filter: blur(12px);
+  border: 1px solid var(--border-subtle);
+  border-radius: var(--radius-lg);
+  box-shadow: var(--shadow-md);
+}
+
+/* Primary Button */
+.btn-primary {
+  display: inline-flex;
+  align-items: center;
+  justify-content: center;
+  gap: 0.5rem;
+  background: linear-gradient(135deg, var(--color-forest-700) 0%, var(--color-forest-600) 100%);
+  color: var(--text-inverted);
+  padding: 0.85rem 1.6rem;
+  border-radius: var(--radius-md);
+  font-family: var(--font-heading);
+  font-weight: 600;
+  font-size: 1rem;
+  box-shadow: 0 4px 14px rgba(24, 58, 33, 0.28);
+  transition: transform var(--transition-fast), box-shadow var(--transition-fast), background var(--transition-fast);
+}
+
+.btn-primary:hover {
+  transform: translateY(-2px);
+  background: linear-gradient(135deg, var(--color-forest-800) 0%, var(--color-forest-700) 100%);
+  box-shadow: 0 6px 18px rgba(24, 58, 33, 0.35);
+}
+
+.btn-primary:active {
+  transform: translateY(0);
+}
+
+.btn-secondary {
+  display: inline-flex;
+  align-items: center;
+  justify-content: center;
+  gap: 0.5rem;
+  background: var(--color-cream-100);
+  color: var(--color-forest-800);
+  border: 1px solid var(--color-cream-300);
+  padding: 0.85rem 1.5rem;
+  border-radius: var(--radius-md);
+  font-family: var(--font-heading);
+  font-weight: 600;
+  font-size: 0.95rem;
+  transition: all var(--transition-fast);
+}
+
+.btn-secondary:hover {
+  background: var(--color-cream-200);
+  border-color: var(--color-forest-400);
+  transform: translateY(-1px);
+}
+
+/* Animations */
+@keyframes pulseSubtle {
+  0%, 100% {
+    transform: scale(1);
+    opacity: 1;
+  }
+  50% {
+    transform: scale(1.05);
+    opacity: 0.85;
+  }
+}
+
+@keyframes bounceSlow {
+  0%, 100% {
+    transform: translateY(0);
+  }
+  50% {
+    transform: translateY(-5px);
+  }
+}
+
+.anim-bounce {
+  animation: bounceSlow 3s ease-in-out infinite;
+}
+
+.anim-pulse {
+  animation: pulseSubtle 2.5s ease-in-out infinite;
+}
