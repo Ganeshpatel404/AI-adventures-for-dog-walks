@@ -4,7 +4,7 @@
 
 ---
 
-## 🌟 Online & Offline Operation Architecture
+ 🌟 Online & Offline Operation Architecture
 
 SniffQuest now supports seamless **Online** and **Offline** execution with resilient fallback:
 
